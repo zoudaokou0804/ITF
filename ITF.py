@@ -381,6 +381,8 @@ class ITF(QWidget, Ui_Form):
             painter.setPen(pen1)
             # painter.drawLine(SPI_Z,NPO_Z) # 第一种方法
             SN_Z=QLine(SPI_Z,NPO_Z)  # 南向北直行直线
+            WBI_Z=QLine(SPI_Z,QPoint(SPI_Z.x(),725+100-SI_Z_width/2))
+            painter.drawLine(WBI_Z)
             painter.drawLine(SN_Z)
         # 南进口道右转
         if SI_R_width>0:
@@ -409,13 +411,13 @@ class ITF(QWidget, Ui_Form):
         # SW_L=QLine(QPoint(SPI_L.x(),SPI_L.y()),QPoint(SPI_L.x(),SPI_L.y()+100-SI_L_width/2))
         # painter.drawLine(SW_L)
         # # 画进口道尾部——————方法2
-        if SI_total_width>0:
-            pen1 = QPen(self.color_S,SI_total_width,Qt.SolidLine)
-            painter.setPen(pen1)
-            SPI1=QPoint((SPI_L.x()+SPI_R.x())/2,(SPI_L.y()+SPI_R.y())/2)
-            SPI2=QPoint((SPI_L.x()+SPI_R.x())/2,(SPI_L.y()+SPI_R.y())/2+100)
-            SI_L=QLine(SPI1,SPI2)
-            painter.drawLine(SI_L)
+        # if SI_total_width>0:
+        #     pen1 = QPen(self.color_S,SI_total_width,Qt.SolidLine)
+        #     painter.setPen(pen1)
+        #     SPI1=QPoint((SPI_L.x()+SPI_R.x())/2,(SPI_L.y()+SPI_R.y())/2)
+        #     SPI2=QPoint((SPI_L.x()+SPI_R.x())/2,(SPI_L.y()+SPI_R.y())/2+100)
+        #     SI_L=QLine(SPI1,SPI2)
+        #     painter.drawLine(SI_L)
 
         
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -566,8 +568,13 @@ class ITF(QWidget, Ui_Form):
             painter.setPen(pen1)
             EPO1=QPoint((EPO_L.x()+EPO_R.x())/2,(EPO_L.y()+EPO_R.y())/2)
             EPO2=QPoint((EPO_L.x()+EPO_R.x())/2+60,(EPO_L.y()+EPO_R.y())/2)
-            EO_L=QLine(EPO1,EPO2)
-            painter.drawLine(EO_L)
+            # EO_L=QLine(EPO1,EPO2)
+            # painter.drawLine(EO_L)
+        if NI_L_width>0:
+            pen1 = QPen(self.color_E,NI_L_width,Qt.SolidLine)
+            painter.setPen(pen1)
+            WBO_L=QLine(EPO_L,QPoint(675+60,EPO_L.y()))
+            painter.drawLine(WBO_L)
             # # 画箭头
             E_arrowPoints=[QPoint(EPO1.x()+60,EPO1.y()-1.3*EO_total_width),QPoint(EPO1.x()+60,EPO1.y()+1.3*EO_total_width),QPoint(EPO1.x()+125,EPO1.y())] # 出口道箭头的点集合
             pen1 = QPen(self.color_E,0,Qt.SolidLine)
