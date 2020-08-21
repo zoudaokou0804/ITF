@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>HTML5模拟交通信号灯动画特效 - 开优网络</title>
+
+<link type="text/css" href="css/style.css" rel="stylesheet" />
+
+</head>
+<body>
+
+<h1 style="text-align:center;margin-top:30px">Intersection Traffic Flow</h1>
+
+<section id="main">
+	<img src="img/gelidai.png" alt="">
+	<img src="img/gelidai.png" alt="">
+	<img src="img/gelidai.png" alt="">
+	<img src="img/gelidai.png" alt="">
+<main style="position:absolute;top:0px;right: 146px;">
+		<div class="le">←</div>
+		<div class="st">↑</div>
+		<div class="ri">→</div>
+</main>
+  <main style="position:absolute;bottom:0px;left: 246px;">
+		<div class="ri">←</div>
+		<div class="st">↓</div>
+		<div class="le">→</div>
+</main>
+	<section style="position:absolute;left:0px;top:185px;">
+		<aside class="ri">↑</aside>
+		<aside class="st1">←</aside>
+		<aside class="le1">↓</aside>
+	</section>
+	<section style="position:absolute;right:0px;bottom:200px;">
+		<aside class="le1">↑</aside>
+		<aside class="st1">→</aside>
+		<aside class="ri">↓</aside>
+	</section>
+	<center>警</center>
+	<span style="left:-325px;top:-360px" class="caoping"></span>
+	<span style="right:-325px;top:-360px" class="caoping"></span>
+	<span style="left:-325px;bottom:-360px" class="caoping"></span>
+	<span style="right:-325px;bottom:-360px" class="caoping"></span>
+	<span style="width:10px;height:260px;left:445px;top:0px;" class="gelidai"></span>
+	<span style="width:10px;height:260px;left:445px;bottom:0px" class="gelidai"></span>
+	<span style="width:260px;height:10px;top:395px;left:-2px" class="gelidai"></span>
+	<span style="width:260px;height:10px;top:395px;right:-2px" class="gelidai"></span>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</section>
+
+<script>
+    var main=document.getElementById('main')
+    var wid=document.body.clientWidth;
+    var le=document.getElementsByClassName("le")
+    var st=document.getElementsByClassName("st")
+    var le1=document.getElementsByClassName("le1")
+    var st1=document.getElementsByClassName("st1")
+    var che=document.querySelectorAll("li");
+        le[0].style=`background:green`
+        le[1].style=`background:green`
+    var i=120;
+        setInterval(function(){
+            for(let j=0;j<2;j++){
+            i--
+            if(i<=0){i=120+i}
+            if(i>105){
+                le[j].style=`background-color:green`
+                le1[j].style=`background-color:red`
+                st[j].style=`background-color:red`
+                st1[j].style=`background-color:red`
+                che[4].style=`animation: lef1 7s infinite linear;`
+                che[5].style=`animation: lef2 7s infinite linear;`
+            }
+            if(i>102 && i<106){
+                le[j].style=`background-color:yellow;animation: ye 0.5s infinite`
+                che[4].style=`animation: lef12 2s linear forwards;`
+                che[5].style=`animation: lef22 2s forwards linear;`
+            }
+            if(i>=63 && i<103){
+                le[j].style=`background-color:red;animation: ye 0s infinite`
+                st[j].style=`background-color:green`
+                che[0].style=`animation:che1 5s infinite linear;`
+                che[1].style=`animation:che2 5s infinite linear;`
+            }
+            if(i>3 && i<61){
+                le[j].style=`background-color:red`
+                st[j].style=`background-color:red`
+            }
+            if(i>=60 && i<63){
+                st[j].style=`background-color:yellow;animation: ye 0.5s infinite`
+                che[0].style=`animation:che12 2s linear forwards;`
+                che[1].style=`animation:che22 2s linear forwards;`
+            }
+            if(i<60 && i>45){
+                le1[j].style=`background-color:green`
+                st1[j].style=`background-color:red`
+                che[6].style=`animation:lef3 7s infinite linear;`
+                che[7].style=`animation:lef4 7s infinite linear;`
+            }
+            if(i<46 && i>42){
+                le1[j].style=`background-color:yellow;animation: ye 0.5s infinite`
+                che[6].style=`animation: lef32 2s forwards linear;`
+                che[7].style=`animation: lef42 2s forwards linear;`
+            }
+            if(i<43 && i>=3){
+                le1[j].style=`background-color:red;animation: ye 0s infinite`
+                st1[j].style=`background-color:green`
+                che[2].style=`animation:che3 7s infinite linear;`
+                che[3].style=`animation:che4 7s infinite linear;`
+            }
+            if(i<3){
+                st1[j].style=`background-color:yellow;animation: ye 0.5s infinite`
+                che[2].style=`animation:che32 2s linear forwards;`
+                che[3].style=`animation:che42 2s linear forwards;`
+            }
+
+        }},1000)
+
+       document.body.onclick=function(){
+           window.location.href="";
+       }
+
+</script>
+
+</body>
+</html>

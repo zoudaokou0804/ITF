@@ -1,12 +1,9 @@
-import platform
-import os
-userPlatform=platform.system()						# 获取操作系统
+from Tkinter import *
+from turtle import *
+import turtle
 
-fileDir=r'D:\Intersection_TF\夜晚.jpg'
 
-if userPlatform == 'Darwin':								# Mac
-    subprocess.call(['open', fileDir])
-elif userPlatform == 'Linux':								# Linux
-    subprocess.call(['xdg-open', fileDir])
-else:																# Windows
-    os.startfile(fileDir)
+forward(100)
+ts = turtle.getscreen()
+
+ts.getcanvas().postscript(file="duck.eps") #.eps文件即postscript脚本

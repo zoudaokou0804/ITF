@@ -44,13 +44,14 @@ class InnerHTML(QMainWindow):
 
     def __init__(self):
         super(InnerHTML, self).__init__()
-        self.setWindowTitle('Welcome to TJAD-QL-4')
-        self.setGeometry(400, 250, 1000, 500)
+        self.setWindowTitle('desigined by zoudaokou')
+        self.setGeometry(400, 250,1000, 700)
 
     def open(self):
         self.show()
         self.browser = QWebEngineView()
-        self.browser.load(QUrl(QFileInfo(r"烟花特效\index .html").absoluteFilePath()))
+        # self.browser.load(QUrl(QFileInfo(r"TrafficSim\index.html").absoluteFilePath()))
+        self.browser.load(QUrl(QFileInfo(r"fireworks\index.html").absoluteFilePath()))
         self.setCentralWidget(self.browser)
 
 
@@ -80,7 +81,7 @@ class ITF(QWidget, Ui_Form):
         self.radioButton_zdk.clicked.connect(self.get_JA_process)
         self.spinBox.setRange(20, 200)
         self.spinBox.setSingleStep(1)
-        self.spinBox.setValue(80)
+        self.spinBox.setValue(100)
         self.pushButton_para_reset2.clicked.connect(self.reset_para2)
         self.pushButton_changeC1.clicked.connect(self.choose_c1)
         self.pushButton_changeC2.clicked.connect(self.choose_c2)
@@ -238,44 +239,49 @@ class ITF(QWidget, Ui_Form):
         NI_Z_width=int(self.data['N'][1])/ratio_div
         NI_R_width=int(self.data['N'][2])/ratio_div
         NI_total_width=NI_L_width+NI_Z_width+NI_R_width 
-        NI_XZ,NI_YZ=base_x+375,base_y+275
-        NPI_Z=QPoint(NI_XZ,NI_YZ)
-        NI_XL,NI_YL=base_x+375+(NI_L_width+NI_Z_width)/2,base_y+275 
-        NPI_L=QPoint(NI_XL,NI_YL)
-        NI_XR,NI_YR=base_x+375-(NI_Z_width+NI_R_width)/2,base_y+275 
-        NPI_R=QPoint(NI_XR,NI_YR)
         # 南进口道     
         SI_L_width=int(self.data['S'][0])/ratio_div
         SI_Z_width=int(self.data['S'][1])/ratio_div
         SI_R_width=int(self.data['S'][2])/ratio_div
         SI_total_width=SI_L_width+SI_Z_width+SI_R_width 
-        SI_XZ,SI_YZ=base_x+525,base_y+725
-        SPI_Z=QPoint(SI_XZ,SI_YZ)
-        SI_XL,SI_YL=base_x+525-(SI_L_width+SI_Z_width)/2,base_y+725
-        SPI_L=QPoint(SI_XL,SI_YL)
-        SI_XR,SI_YR=base_x+525+(SI_Z_width+SI_R_width)/2,base_y+725
-        SPI_R=QPoint(SI_XR,SI_YR)
         # 西进口道  
         WI_L_width=int(self.data['W'][0])/ratio_div
         WI_Z_width=int(self.data['W'][1])/ratio_div
         WI_R_width=int(self.data['W'][2])/ratio_div
         WI_total_width=WI_L_width+WI_Z_width+WI_R_width 
-        WI_XZ,WI_YZ=base_x+225,base_y+575
-        WPI_Z=QPoint(WI_XZ,WI_YZ)
-        WI_XL,WI_YL=base_x+225,base_y+575-(WI_L_width+WI_Z_width)/2
-        WPI_L=QPoint(WI_XL,WI_YL)
-        WI_XR,WI_YR=base_x+225,base_y+575+(WI_Z_width+WI_R_width)/2    
-        WPI_R=QPoint(WI_XR,WI_YR)
         # 东进口道
         EI_L_width=int(self.data['E'][0])/ratio_div
         EI_Z_width=int(self.data['E'][1])/ratio_div
         EI_R_width=int(self.data['E'][2])/ratio_div
         EI_total_width=EI_L_width+EI_Z_width+EI_R_width 
+###############################################################################      
+        # 北进口道坐标
+        NI_XZ,NI_YZ=base_x+375,base_y+275
+        NPI_Z=QPoint(NI_XZ,NI_YZ)
+        NI_XL,NI_YL=base_x+375+(NI_L_width+NI_Z_width)/2,base_y+275-(NI_L_width+WI_Z_width)/2
+        NPI_L=QPoint(NI_XL,NI_YL)
+        NI_XR,NI_YR=base_x+375-(NI_Z_width+NI_R_width)/2,base_y+275-(NI_R_width+EI_Z_width)/2 
+        NPI_R=QPoint(NI_XR,NI_YR)
+        # 南进口道坐标       
+        SI_XZ,SI_YZ=base_x+525,base_y+725
+        SPI_Z=QPoint(SI_XZ,SI_YZ)
+        SI_XL,SI_YL=base_x+525-(SI_L_width+SI_Z_width)/2,base_y+725+(SI_L_width+EI_Z_width)/2
+        SPI_L=QPoint(SI_XL,SI_YL)
+        SI_XR,SI_YR=base_x+525+(SI_Z_width+SI_R_width)/2,base_y+725+(SI_R_width+WI_Z_width)/2
+        SPI_R=QPoint(SI_XR,SI_YR)
+        # 西进口道坐标        
+        WI_XZ,WI_YZ=base_x+225,base_y+575
+        WPI_Z=QPoint(WI_XZ,WI_YZ)
+        WI_XL,WI_YL=base_x+225-(WI_L_width+SI_Z_width)/2,base_y+575-(WI_L_width+WI_Z_width)/2
+        WPI_L=QPoint(WI_XL,WI_YL)
+        WI_XR,WI_YR=base_x+225-(NI_Z_width+WI_R_width)/2,base_y+575+(WI_Z_width+WI_R_width)/2    
+        WPI_R=QPoint(WI_XR,WI_YR)
+        # 东进口道坐标        
         EI_XZ,EI_YZ=base_x+675,base_y+425
         EPI_Z=QPoint(EI_XZ,EI_YZ)
-        EI_XL,EI_YL=base_x+675,base_y+425+(EI_L_width+EI_Z_width)/2
+        EI_XL,EI_YL=base_x+675+(EI_L_width+NI_Z_width)/2,base_y+425+(EI_L_width+EI_Z_width)/2
         EPI_L=QPoint(EI_XL,EI_YL)
-        EI_XR,EI_YR=base_x+675,base_y+425-(EI_Z_width+EI_R_width)/2
+        EI_XR,EI_YR=base_x+675+(SI_Z_width+EI_R_width)/2,base_y+425-(EI_Z_width+EI_R_width)/2
         EPI_R=QPoint(EI_XR,EI_YR)
         """
         以下为东西南北出口道
@@ -287,9 +293,9 @@ class ITF(QWidget, Ui_Form):
         NO_total_width=NO_L_width+NO_Z_width+NO_R_width # 北出口道总线宽
         NO_XZ,NO_YZ=base_x+525,base_y+275
         NPO_Z=QPoint(NO_XZ,NO_YZ)
-        NO_XL,NO_YL=base_x+525-(NO_L_width+NO_Z_width)/2,base_y+275
+        NO_XL,NO_YL=base_x+525-(NO_L_width+NO_Z_width)/2,base_y+275-(NO_L_width+WI_Z_width)/2
         NPO_L=QPoint(NO_XL,NO_YL)
-        NO_XR,NO_YR=base_x+525+(NO_Z_width+NO_R_width)/2,base_y+275
+        NO_XR,NO_YR=base_x+525+(NO_Z_width+NO_R_width)/2,base_y+275-(EI_Z_width+NO_R_width)/2
         NPO_R=QPoint(NO_XR,NO_YR)
         
         # 南出口道
@@ -299,9 +305,9 @@ class ITF(QWidget, Ui_Form):
         SO_total_width=SO_L_width+SO_Z_width+SO_R_width # 南出口道总线宽
         SO_XZ,SO_YZ=base_x+375,base_y+725
         SPO_Z=QPoint(SO_XZ,SO_YZ)
-        SO_XL,SO_YL=base_x+375+(NO_L_width+NO_Z_width)/2,base_y+725
+        SO_XL,SO_YL=base_x+375+(SO_L_width+NO_Z_width)/2,base_y+725+(NO_L_width+EI_Z_width)/2
         SPO_L=QPoint(SO_XL,SO_YL)
-        SO_XR,SO_YR=base_x+375-(NO_Z_width+NO_R_width)/2,base_y+725
+        SO_XR,SO_YR=base_x+375-(NO_Z_width+SO_R_width)/2,base_y+725+(WI_Z_width+NO_R_width)/2
         SPO_R=QPoint(SO_XR,SO_YR)
         # 西出口道
         WO_L_width=SI_L_width #等于南进口道左转
@@ -310,10 +316,10 @@ class ITF(QWidget, Ui_Form):
         WO_total_width=WO_L_width+WO_Z_width+WO_R_width # 西出口道总线宽
         WO_XZ,WO_YZ=base_x+225,base_y+425
         WPO_Z=QPoint(WO_XZ,WO_YZ)
-        WO_XZ,WO_YZ=base_x+225,base_y+425+(WO_L_width+WO_Z_width)/2
-        WPO_L=QPoint(WO_XZ,WO_YZ)
-        WO_XZ,WO_YZ=base_x+225,base_y+425-(WO_Z_width+WO_R_width)/2
-        WPO_R=QPoint(WO_XZ,WO_YZ)
+        WO_XL,WO_YL=base_x+225-(WO_L_width+SI_Z_width)/2,base_y+425+(WO_L_width+WO_Z_width)/2
+        WPO_L=QPoint(WO_XL,WO_YL)
+        WO_XR,WO_YR=base_x+225-(NI_Z_width+WO_R_width)/2,base_y+425-(WO_Z_width+WO_R_width)/2
+        WPO_R=QPoint(WO_XR,WO_YR)
          # 东出口道
         EO_L_width=NI_L_width #等于北进口到左转
         EO_Z_width=WI_Z_width #等于西进口道直行
@@ -321,9 +327,9 @@ class ITF(QWidget, Ui_Form):
         EO_total_width=EO_L_width+EO_Z_width+EO_R_width # 东出口道总线宽
         EO_XZ,EO_YZ=base_x+675,base_y+575
         EPO_Z=QPoint(EO_XZ,EO_YZ)
-        EO_XL,EO_YL=base_x+675,base_y+575-(EO_L_width+EO_Z_width)/2
+        EO_XL,EO_YL=base_x+675+(EO_L_width+NI_Z_width)/2,base_y+575-(EO_L_width+EO_Z_width)/2
         EPO_L=QPoint(EO_XL,EO_YL)
-        EO_XR,EO_YR=base_x+675,base_y+575+(EO_Z_width+EO_R_width)/2
+        EO_XR,EO_YR=base_x+675+(SI_Z_width+EO_R_width)/2,base_y+575+(EO_Z_width+EO_R_width)/2
         EPO_R=QPoint(EO_XR,EO_YR)
         
 #################以下为具体的绘图操作#######################以下为具体的绘图操作############################## 以下为具体的绘图操作#################################################################################################################
@@ -331,7 +337,7 @@ class ITF(QWidget, Ui_Form):
         self.image.fill(Qt.white)# 填充透明色
         # self.setWindowTitle("简单的画板")
         painter = QPainter(self.image)   
-        painter.setRenderHint(True)
+        painter.setRenderHint(True)# 抗锯齿，去除绘图锯齿
         # 画直行车流
         # 北进口道直行
         if NI_Z_width>0:
@@ -340,7 +346,7 @@ class ITF(QWidget, Ui_Form):
             NS_Z=QLine(NPI_Z,SPO_Z) # 北向南直行直线
             WBI_Z=QLine(NPI_Z,QPoint(NPI_Z.x(),275-100+NI_Z_width/2))
             painter.drawLine(WBI_Z)
-            painter.drawLine(NS_Z) # 抗锯齿，去除绘图锯齿
+            painter.drawLine(NS_Z) 
         # 北进口道右转
         if NI_R_width>0:
             pen1 = QPen(self.color_N,NI_R_width,Qt.SolidLine)
@@ -543,7 +549,7 @@ class ITF(QWidget, Ui_Form):
             pen1 = QPen(self.color_N,SI_Z_width,Qt.SolidLine)
             painter.setPen(pen1)
             WBO_Z=QLine(NPO_Z,QPoint(NPO_Z.x(),275-60))
-            painter.drawLine(WBO_Z)
+            # painter.drawLine(WBO_Z)
         if EI_R_width>0:
             pen1 = QPen(self.color_N,EI_R_width,Qt.SolidLine)
             painter.setPen(pen1)
@@ -554,10 +560,10 @@ class ITF(QWidget, Ui_Form):
             painter.setPen(pen1)
             NPO1=QPoint((NPO_L.x()+NPO_R.x())/2,(NPO_L.y()+NPO_R.y())/2)
             NPO2=QPoint((NPO_L.x()+NPO_R.x())/2,(NPO_L.y()+NPO_R.y())/2-60)
-            NO_L=QLine(NPO1,NPO2)
-            painter.drawLine(NO_L)
+            # NO_L=QLine(NPO1,NPO2)
+            # painter.drawLine(NO_L)
             # # 画出口道箭头
-            N_arrowPoints=[QPoint(NPO1.x()-1.3*NO_total_width,NPO1.y()-60),QPoint(NPO1.x()+1.3*NO_total_width,NPO1.y()-60),QPoint(NPO1.x(),NPO1.y()-125)] # 出口道箭头的点集合
+            N_arrowPoints=[QPoint(NPO1.x()-1.3*NO_total_width,NPO1.y()-60),QPoint(NPO_R.x(),275-60),NPO_R,NPO_L,QPoint(NPO_L.x(),275-60),QPoint(NPO1.x()+1.3*NO_total_width,NPO1.y()-60),QPoint(NPO1.x(),NPO1.y()-100-NO_total_width)] # 出口道箭头的点集合
             pen1 = QPen(self.color_N,0,Qt.SolidLine)
             painter.setPen(pen1)
             brush = QBrush(self.color_N)
@@ -576,7 +582,7 @@ class ITF(QWidget, Ui_Form):
             pen1 = QPen(self.color_S,NI_Z_width,Qt.SolidLine)
             painter.setPen(pen1)
             WBO_Z=QLine(SPO_Z,QPoint(SPO_Z.x(),725+60))
-            painter.drawLine(WBO_Z)
+            # painter.drawLine(WBO_Z)
         if WI_R_width>0:
             pen1 = QPen(self.color_S,WI_R_width,Qt.SolidLine)
             painter.setPen(pen1)
@@ -587,10 +593,10 @@ class ITF(QWidget, Ui_Form):
             painter.setPen(pen1)
             SPO1=QPoint((SPO_L.x()+SPO_R.x())/2,(SPO_L.y()+SPO_R.y())/2)
             SPO2=QPoint((SPO_L.x()+SPO_R.x())/2,(SPO_L.y()+SPO_R.y())/2+60)
-            SO_L=QLine(SPO1,SPO2)
-            painter.drawLine(SO_L)
+            # SO_L=QLine(SPO1,SPO2)
+            # painter.drawLine(SO_L)
             # # 画箭头
-            S_arrowPoints=[QPoint(SPO1.x()-1.3*SO_total_width,SPO1.y()+60),QPoint(SPO1.x()+1.3*SO_total_width,SPO1.y()+60),QPoint(SPO1.x(),SPO1.y()+125)] # 出口道箭头的点集合
+            S_arrowPoints=[QPoint(SPO1.x()-1.3*SO_total_width,SPO1.y()+60),QPoint(SPO_R.x(),725+60),SPO_R,SPO_L,QPoint(SPO_L.x(),725+60),QPoint(SPO1.x()+1.3*SO_total_width,SPO1.y()+60),QPoint(SPO1.x(),SPO1.y()+100+SO_total_width)] # 出口道箭头的点集合
             pen1 = QPen(self.color_S,0,Qt.SolidLine)
             painter.setPen(pen1)
             brush = QBrush(self.color_S)
@@ -620,10 +626,10 @@ class ITF(QWidget, Ui_Form):
             painter.setPen(pen1)
             WPO1=QPoint((WPO_R.x()+WPI_R.x())/2,(WPO_L.y()+WPO_R.y())/2)
             WPO2=QPoint((WPO_R.x()+WPI_R.x())/2-60,(WPO_L.y()+WPO_R.y())/2)
-            WO_L=QLine(WPO1,WPO2)
-            painter.drawLine(WO_L)
+            # WO_L=QLine(WPO1,WPO2)
+            # painter.drawLine(WO_L)
             # # 画箭头
-            W_arrowPoints=[QPoint(WPO1.x()-60,WPO1.y()-1.3*WO_total_width),QPoint(WPO1.x()-60,WPO1.y()+1.3*WO_total_width),QPoint(WPO1.x()-125,WPO1.y())] # 出口道箭头的点集合
+            W_arrowPoints=[QPoint(WPO1.x()-60,WPO1.y()-1.3*WO_total_width),QPoint(WPO1.x()-60,WPO1.y()+1.3*WO_total_width),QPoint(WPO1.x()-100-WO_total_width,WPO1.y())] # 出口道箭头的点集合
             pen1 = QPen(self.color_W,0,Qt.SolidLine)
             painter.setPen(pen1)
             brush = QBrush(self.color_W)
@@ -653,10 +659,10 @@ class ITF(QWidget, Ui_Form):
             painter.setPen(pen1)
             EPO1=QPoint((EPO_L.x()+EPO_R.x())/2,(EPO_L.y()+EPO_R.y())/2)
             EPO2=QPoint((EPO_L.x()+EPO_R.x())/2+60,(EPO_L.y()+EPO_R.y())/2)
-            EO_L=QLine(EPO1,EPO2)
-            painter.drawLine(EO_L)
+            # EO_L=QLine(EPO1,EPO2)
+            # painter.drawLine(EO_L)
             # # 画箭头
-            E_arrowPoints=[QPoint(EPO1.x()+60,EPO1.y()-1.3*EO_total_width),QPoint(EPO1.x()+60,EPO1.y()+1.3*EO_total_width),QPoint(EPO1.x()+125,EPO1.y())] # 出口道箭头的点集合
+            E_arrowPoints=[QPoint(EPO1.x()+60,EPO1.y()-1.3*EO_total_width),QPoint(EPO1.x()+60,EPO1.y()+1.3*EO_total_width),QPoint(EPO1.x()+100+EO_total_width,EPO1.y())] # 出口道箭头的点集合
             pen1 = QPen(self.color_E,0,Qt.SolidLine)
             painter.setPen(pen1)
             brush = QBrush(self.color_E)
